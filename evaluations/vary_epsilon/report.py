@@ -56,6 +56,7 @@ for i_meta_para in range(len(results_list)):
         testing_data_size += [trials_list[i_trial]['testing_data_size']]
         training_mode_count += [trials_list[i_trial]['training_data_mode_percentage'] * (2 ** hyper_parameters['n_lam'])]
         n_theta+=[trials_list[i_trial]['vn_training_theta'].size]
+
     for i_trial in range(len(trials_list2)):
         pn_test_error += [trials_list2[i_trial]['pn_prediction_error']]
         vn_test_error += [trials_list2[i_trial]['vn_prediction_error']]

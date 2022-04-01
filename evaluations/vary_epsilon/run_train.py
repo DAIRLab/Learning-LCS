@@ -5,7 +5,6 @@ import numpy as np
 from casadi import *
 import lcs.optim as opt
 
-
 # loop for trials
 n_state = 4
 n_control = 2
@@ -13,9 +12,8 @@ n_lam = 4
 gen_stiffness = 0.5
 
 training_data_size = 5000
-training_data_noise_level=1e-2
+training_data_noise_level = 1e-2
 testing_data_size = 1000
-
 
 max_iter = 5000
 max_trial = 15
@@ -121,6 +119,8 @@ for meta_para in meta_para_list:
         pn_theta_trace = []
         vn_loss_trace = []
         vn_theta_trace = []
+        vn_dyn_loss_trace = []
+        vn_lcp_loss_trace = []
         # load data
         x_batch = training_data['x_batch']
         u_batch = training_data['u_batch']
@@ -150,6 +150,8 @@ for meta_para in meta_para_list:
             vn_loss_trace += [vn_mean_loss]
             vn_theta_trace += [vn_curr_theta]
             vn_curr_theta = vn_optimizier.step(vn_curr_theta, vn_dtheta)
+            vn_dyn_loss_trace += [vn_dyn_loss]
+            vn_lcp_loss_trace += [vn_lcp_loss]
 
             if iter % 100 == 0:
                 print('epsilon:', meta_para,
@@ -169,6 +171,8 @@ for meta_para in meta_para_list:
         trial_result['pn_training_theta'] = pn_theta_trace[-1]
         trial_result['vn_training_loss'] = vn_loss_trace[-1]
         trial_result['vn_training_theta'] = vn_theta_trace[-1]
+        trial_result['vn_training_dyn_loss'] = vn_dyn_loss_trace[-1]
+        trial_result['vn_training_lcp_loss'] = vn_lcp_loss_trace[-1]
         print(' ')
 
         # --------------------------- testing the prediction error for PN and VN ----------------------------------#
@@ -219,7 +223,7 @@ for meta_para in meta_para_list:
     meta_para_trials += [trial_result_trace]
 
 # save
-np.save('results2',
+np.save('results',
         {
             'meta_para_list': meta_para_list,
             'meta_para_trials': meta_para_trials,
