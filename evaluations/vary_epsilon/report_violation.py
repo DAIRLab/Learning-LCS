@@ -68,14 +68,14 @@ plt.figure()
 # # plt.fill_between(x, pn_lam_mean-pn_lam_std, pn_lam_mean+pn_lam_std, color='tab:blue', alpha=0.4)
 x = np.arange(meta_para_list.size)
 plt.errorbar(x, avg_vn_dyn_loss, yerr=std_vn_dyn_loss, label='dyn violation', lw=4, marker='o',
-             markersize=7, capsize=3, elinewidth=2)
+             markersize=7, capsize=3, elinewidth=2, color='tab:red')
 plt.errorbar(x + 0.05, avg_vn_lcp_loss, yerr=std_vn_lcp_loss, label='lcp violation', lw=4, marker='o',
-             markersize=7, capsize=3, elinewidth=2)
+             markersize=7, capsize=3, elinewidth=2, color='tab:green')
 # # plt.plot(x, vn_lam, label='Violation-based', lw=3, marker='o', markersize=7)
 label = ['10', '$5$', '$1$', '$0.5$', '$0.1$', '$10^{-2}$', '$10^{-3}$', '$10^{-4}$', '$10^{-5}$']
 plt.xticks(x, labels=label)
 plt.xlabel('$\epsilon$', labelpad=15)
-plt.ylabel(r'$e_{test}$', fontsize=25)
+plt.ylabel('violation loss', fontsize=25)
 plt.grid()
 plt.legend(loc='lower left')
 plt.yscale('log')
