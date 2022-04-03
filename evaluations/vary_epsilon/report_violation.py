@@ -75,7 +75,7 @@ plt.errorbar(x + 0.05, avg_vn_lcp_loss, yerr=std_vn_lcp_loss, label='lcp violati
 label = ['10', '$5$', '$1$', '$0.5$', '$0.1$', '$10^{-2}$', '$10^{-3}$', '$10^{-4}$', '$10^{-5}$']
 plt.xticks(x, labels=label)
 plt.xlabel('$\epsilon$', labelpad=15)
-plt.ylabel('violation loss', fontsize=25)
+plt.ylabel('violation loss in training', fontsize=20)
 plt.grid()
 plt.legend(loc='lower left')
 plt.yscale('log')
