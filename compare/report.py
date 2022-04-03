@@ -36,7 +36,7 @@ plt.grid()
 
 # Adding Xticks
 plt.xlabel('Number of modes (partitions)')
-plt.ylabel('Training time [sec]')
+plt.ylabel('Running time [sec]')
 plt.xticks([r + barWidth for r in range(len(ours))],
            ['4', '8', '16', '32', '63'])
 
