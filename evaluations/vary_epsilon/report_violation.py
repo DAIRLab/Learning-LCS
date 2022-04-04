@@ -24,6 +24,8 @@ std_vn_dyn_loss = []
 std_vn_lcp_loss = []
 # load the results list
 results_list = load['meta_para_trials']
+
+trial_num=len(results_list)
 for i_meta_para in range(len(results_list)):
 
     meta_para = meta_para_list[i_meta_para]
@@ -43,8 +45,8 @@ for i_meta_para in range(len(results_list)):
     # compute the statistics
     avg_vn_dyn_loss += [np.array(vn_training_dyn_loss).mean()]
     avg_vn_lcp_loss += [np.array(vn_training_lcp_loss).mean()]
-    std_vn_dyn_loss += [np.array(vn_training_dyn_loss).std()]
-    std_vn_lcp_loss += [np.array(vn_training_lcp_loss).std()]
+    std_vn_dyn_loss += [np.array(vn_training_dyn_loss).std()/np.sqrt(trial_num)]
+    std_vn_lcp_loss += [np.array(vn_training_lcp_loss).std()/np.sqrt(trial_num)]
 
 
 print('------')
@@ -75,7 +77,7 @@ plt.errorbar(x + 0.05, avg_vn_lcp_loss, yerr=std_vn_lcp_loss, label='lcp violati
 label = ['10', '$5$', '$1$', '$0.5$', '$0.1$', '$10^{-2}$', '$10^{-3}$', '$10^{-4}$', '$10^{-5}$']
 plt.xticks(x, labels=label)
 plt.xlabel('$\epsilon$', labelpad=15)
-plt.ylabel('final violation in training', fontsize=20)
+plt.ylabel('violation loss', fontsize=25)
 plt.grid()
 plt.legend(loc='lower left')
 plt.yscale('log')

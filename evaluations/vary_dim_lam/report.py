@@ -30,12 +30,19 @@ std_training_mode_count = []
 # load the results list
 results_list = load['meta_para_trials']
 results_list2 = load2['meta_para_trials']
+
+# trial num
+trial_num=len(results_list[0])+len(results_list2[0])
+
 for i_meta_para in range(len(results_list)):
 
     meta_para = meta_para_list[i_meta_para]
     # current meta parameter trials
     trials_list = results_list[i_meta_para]
     trials_list2 = results_list2[i_meta_para]
+
+
+
     # enumerate for each trials
     pn_test_error = []
     vn_test_error = []
@@ -63,14 +70,14 @@ for i_meta_para in range(len(results_list)):
     # compute the statistics
     avg_pn_test_error += [np.array(pn_test_error).mean()]
     avg_vn_test_error += [np.array(vn_test_error).mean()]
-    std_pn_test_error += [np.array(pn_test_error).std()]
-    std_vn_test_error += [np.array(vn_test_error).std()]
+    std_pn_test_error += [np.array(pn_test_error).std()/np.sqrt(trial_num)]
+    std_vn_test_error += [np.array(vn_test_error).std()/np.sqrt(trial_num)]
     avg_data_stiffness += [np.array(data_stiffness).mean()]
-    std_data_stiffness += [np.array(data_stiffness).std()]
+    std_data_stiffness += [np.array(data_stiffness).std()/np.sqrt(trial_num)]
     avg_training_data_size += [np.array(training_data_size).mean()]
     avg_testing_data_size += [np.array(testing_data_size).mean()]
     avg_training_mode_count += [np.array(training_mode_count).mean()]
-    std_training_mode_count += [np.array(training_mode_count).std()]
+    std_training_mode_count += [np.array(training_mode_count).std()/np.sqrt(trial_num)]
 
 print('------')
 print('avg_training_data_stiffness:', avg_data_stiffness)
@@ -81,6 +88,8 @@ print('std_mode_count:', std_training_mode_count)
 
 print('------')
 print('avg_testing_data_size:', avg_testing_data_size)
+
+
 
 # -----------------------------------------------
 params = {'axes.labelsize': 20,

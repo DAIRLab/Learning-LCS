@@ -29,6 +29,10 @@ std_training_mode_count = []
 avg_n_theta=[]
 # load the results list
 results_list = load['meta_para_trials']
+
+# trial num
+trial_num=len(results_list)
+
 for i_meta_para in range(len(results_list)):
 
     meta_para = meta_para_list[i_meta_para]
@@ -54,14 +58,14 @@ for i_meta_para in range(len(results_list)):
     # compute the statistics
     avg_pn_test_error += [np.array(pn_test_error).mean()]
     avg_vn_test_error += [np.array(vn_test_error).mean()]
-    std_pn_test_error += [np.array(pn_test_error).std()]
-    std_vn_test_error += [np.array(vn_test_error).std()]
+    std_pn_test_error += [np.array(pn_test_error).std()/np.sqrt(trial_num)]
+    std_vn_test_error += [np.array(vn_test_error).std()/np.sqrt(trial_num)]
     avg_data_stiffness += [np.array(data_stiffness).mean()]
-    std_data_stiffness += [np.array(data_stiffness).std()]
+    std_data_stiffness += [np.array(data_stiffness).std()/np.sqrt(trial_num)]
     avg_training_data_size += [np.array(training_data_size).mean()]
     avg_testing_data_size += [np.array(testing_data_size).mean()]
     avg_training_mode_count += [np.array(training_mode_count).mean()]
-    std_training_mode_count += [np.array(training_mode_count).std()]
+    std_training_mode_count += [np.array(training_mode_count).std()/np.sqrt(trial_num)]
     avg_n_theta+=[np.array(n_theta).mean()]
 
 print('------')

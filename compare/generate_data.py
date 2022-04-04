@@ -7,7 +7,7 @@ import lcs.optim as opt
 
 n_state = 4
 n_control = 2
-n_lam = 6
+n_lam = 16
 gen_stiffness = 1
 training_data_size = 5000
 

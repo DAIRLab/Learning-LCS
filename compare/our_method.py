@@ -8,6 +8,8 @@ st = time.time()
 
 # load data
 data_train = np.load('data_train.npy', allow_pickle=True).item()
+print('number of modes in training:', data_train['K'])
+
 
 n_state = data_train['n_state']
 n_control = data_train['n_control']
@@ -20,19 +22,19 @@ x_next_batch = data_train['Y_data']
 
 # establish the VN learner (violation-based method)
 F_stiffness = 1
-gamma = 1e-2
-epsilon = 1e-2
+gamma = 1e-1
+epsilon = 1e0
 vn_learner = lcs_class.LCS_VN(n_state=n_state, n_control=n_control, n_lam=n_lam, F_stiffness=F_stiffness)
 vn_learner.diff(gamma=gamma, epsilon=epsilon, w_C=1e-6, C_ref=0, w_F=0e-6, F_ref=0)
 
 # establish the optimizer
-vn_learning_rate = 1e-3
+vn_learning_rate = 0.5e-3
 vn_optimizier = opt.Adam()
 vn_optimizier.learning_rate = vn_learning_rate
 
 # training loop
 max_iter = 50
-mini_batch_size = 100
+mini_batch_size = 50
 vn_curr_theta = 0.01 * np.random.randn(vn_learner.n_theta)
 
 

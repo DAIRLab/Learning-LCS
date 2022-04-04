@@ -18,12 +18,11 @@ warnings.filterwarnings("ignore", category=FutureWarning)
 st = time.time()
 
 
-separation = 'Softmax'
-# separation='Voronoi'
+
+separation='Voronoi'
 sigma = 1
 alpha = 1.0e-3
 beta = 1.0e-3
-softmax_maxiter = 100000
 maxiter = 15
 
 data_train = np.load('data_train.npy', allow_pickle=True).item()
